@@ -1,0 +1,145 @@
+<!--Main Navigation-->
+<header class="intro-header">
+  <!--Intro Section-->
+  <section class="view intro-2">
+    <div class="full-bg-img mask rgba-gradient">
+      <div class="container flex-center">
+        <div class="d-flex align-items-center content-height w-100">
+          <div class="row flex-center pt-5 mt-3 w-100">
+            <div class="col-md-6 text-center text-md-left mb-5">
+              <div class="white-text">
+                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right
+                  now! </h2>
+                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur
+                  adipisicing
+                  elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat!
+                  Commodi sequi
+                  non animi ea dolor molestiae, quisquam iste, maiores. Nulla.</h6>
+                <br>
+                <a mdbBtn color="white" outline="true" class="wow fadeInLeft waves-light" data-wow-delay="0.3s"
+                   mdbWavesEffect>Learn more</a>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-xl-5 offset-xl-1">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToDonor()" mdbWavesEffect>Donatori</button>
+                <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToDoctor()" mdbWavesEffect>Doctori</button>
+                <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToStaff()" mdbWavesEffect>Staff</button>
+              </div>
+
+
+              <!--Form for Doctor Login-->
+              <div class="card wow fadeInRight" *ngIf="isDoctor()" data-wow-delay="0.3s">
+                <div class="card-body">
+                  <!--Header-->
+                  <div class="text-center">
+                    <h3 class="white-text"><i class="fa fa-user white-text"></i> Logheaza-te ca si doctor:</h3>
+                    <hr class="hr-light">
+                  </div>
+
+                  <!--Body-->
+                  <div class="md-form">
+                    <i class="fa fa-user prefix white-text"></i>
+                    <input type="text" id="form3Doctor" class="form-control" mdbInputDirective>
+                    <label for="form3Doctor">Your name</label>
+                  </div>
+                  <div class="md-form">
+                    <i class="fa fa-envelope prefix white-text"></i>
+                    <input type="text" id="form2Doctor" class="form-control" mdbInputDirective>
+                    <label for="form2Doctor">Your email</label>
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fa fa-lock prefix white-text"></i>
+                    <input type="password" id="form4Doctor" class="form-control" mdbInputDirective>
+                    <label for="form4Doctor">Your password</label>
+                  </div>
+
+                  <div class="text-center">
+                    <a routerLink="/homepage-doctor">
+                      <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect>Sign up</button>
+                    </a>
+                    <hr class="hr-light mb-3 mt-4">
+
+
+                  </div>
+
+                </div>
+              </div>
+              <!--/.Form-->
+
+
+              <!--Form for Staff Login-->
+              <div class="card wow fadeInRight" *ngIf="isStaff()" data-wow-delay="0.3s">
+                <div class="card-body">
+                  <!--Header-->
+                  <div class="text-center">
+                    <h3 class="white-text"><i class="fa fa-user white-text"></i> Logheaza-te ca si staff</h3>
+                    <hr class="hr-light">
+                  </div>
+
+                  <!--Body-->
+                  <div class="md-form">
+                    <i class="fa fa-user prefix white-text"></i>
+                    <input type="text" id="form3Staff" class="form-control" mdbInputDirective>
+                    <label for="form3Staff">Your name</label>
+                  </div>
+                  <div class="md-form">
+                    <i class="fa fa-envelope prefix white-text"></i>
+                    <input type="text" id="form2Staff" class="form-control" mdbInputDirective>
+                    <label for="form2Staff">Your email</label>
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fa fa-lock prefix white-text"></i>
+                    <input type="password" id="form4Staff" class="form-control" mdbInputDirective>
+                    <label for="form4Staff">Your password</label>
+                  </div>
+
+                  <div class="text-center">
+                    <a routerLink="/homepage-staff">
+                      <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect> Logheaza-te ca si donator</button>
+                    </a>
+                    <hr class="hr-light mb-3 mt-4">
+                  </div>
+
+                </div>
+              </div>
+              <!--/.Form-->
+
+              <!--Form for Donor Login-->
+              <div class="card wow fadeInRight" *ngIf="isDonor()" data-wow-delay="0.3s">
+                <div class="card-body">
+                  <!--Header-->
+                  <div class="text-center">
+                    <h3 class="white-text"><i class="fa fa-user white-text"></i> Inregistreaza-te ca si donator:</h3>
+                    <hr class="hr-light">
+                  </div>
+
+                  <!--Body-->
+                  <h4>
+                    Pentru ca iti pretuim timpul, nu mai este nevoie sa iti creezi cont.
+                  </h4>
+                  <h4>
+                    Logheaza-te folosind unul din conturile tale de retele sociale
+                  </h4>
+                  <div class="inline-ul text-center d-flex justify-content-center">
+                    <a routerLink="/homepage-donor" class="icons-sm tw-ic px-4"><i class="fa fa-twitter white-text"></i></a>
+                    <a routerLink="/homepage-donor" class="icons-sm li-ic px-4"><i class="fa fa-linkedin white-text"> </i></a>
+                    <a routerLink="/homepage-donor" class="icons-sm ins-ic px-4"><i class="fa fa-instagram white-text"> </i></a>
+                  </div>
+
+                </div>
+              </div>
+              <!--/.Form-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</header>
+<!--Main Navigation-->
