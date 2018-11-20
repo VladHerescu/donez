@@ -12,14 +12,37 @@
 
   <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
   <div *ngIf="isLastDonations()">
-    <h3>Buna stimabile Doctor! Mai jos statusurile donarilor!</h3>
-    <div *ngFor="let dStatus of donationStatus">
-      {{dStatus.patientInNeed}}
-      {{dStatus.patientDetails}}
-      {{dStatus.quantityAvailable}} of {{dStatus.quantityRequired}} gathered
-    </div>
-  </div>
+    <h2>Behold, these are tha last donations</h2>
+    <table class="table table-striped table-bordered mt-4">
+      <thead class="black white-text">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Numele Pacientului</th>
+        <th scope="col">Orasul</th>
+        <th scope="col">Clinica</th>
+        <th scope="col">Detalii</th>
+        <th scope="col">Cantitate recoltata</th>
 
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dStatus of donationStatus">
+        <th scope="row">{{donationStatus.indexOf(dStatus)}}</th>
+        <td>{{dStatus.patientInNeed}}</td>
+        <td>{{dStatus.patientCity}}</td>
+        <td>{{dStatus.patientHospital}}</td>
+        <td>{{dStatus.patientDetails}}</td>
+        <td data-toggle="tooltip" data-placement="top" title="Avem {{dStatus.quantityAvailable}} din {{dStatus.quantityRequired}} litri">
+          <div class="progress" >
+            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': dStatus.quantityAvailable/dStatus.quantityRequired * 100 + '%'}"
+                 [attr.aria-valuenow]="dStatus.quantityAvailable" aria-valuemin="0" [attr.aria-valuemax]="dStatus.quantityRequired"></div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
 
   <div *ngIf="isForm()">
     <h1>Pentru a va verifica eligibilitatea pentru donarea de sange va rugam sa completati chestionarul urmator</h1>

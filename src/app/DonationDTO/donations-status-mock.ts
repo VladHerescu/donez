@@ -4,7 +4,7 @@ export const DonationsStatusMock: DonationStatus[] = [
   {
     patientInNeed: "Dan Sobor",
     patientCity: "Bucuresti",
-    patientHostipal: "Regina Maria",
+    patientHospital: "Regina Maria",
     patientDetails: "Age 47, still in very good shape",
     quantityRequired: 4.5,
     quantityAvailable: 1
@@ -12,7 +12,7 @@ export const DonationsStatusMock: DonationStatus[] = [
   {
     patientInNeed: "Mihnea Dan",
     patientCity: "Bucuresti",
-    patientHostipal: "Sanador",
+    patientHospital: "Sanador",
     patientDetails: "E nebun",
     quantityRequired: 8,
     quantityAvailable: 2
@@ -20,7 +20,7 @@ export const DonationsStatusMock: DonationStatus[] = [
   {
     patientInNeed: "Dan Sobor",
     patientCity: "Bucuresti",
-    patientHostipal: "Regina Maria",
+    patientHospital: "Regina Maria",
     patientDetails: "Age 47, still in very good shape",
     quantityRequired: 4.5,
     quantityAvailable: 1
@@ -28,7 +28,7 @@ export const DonationsStatusMock: DonationStatus[] = [
   {
     patientInNeed: "Mihnea Dan",
     patientCity: "Bucuresti",
-    patientHostipal: "Sanador",
+    patientHospital: "Sanador",
     patientDetails: "E nebun",
     quantityRequired: 8,
     quantityAvailable: 2
@@ -36,7 +36,7 @@ export const DonationsStatusMock: DonationStatus[] = [
   {
     patientInNeed: "Dan Sobor",
     patientCity: "Bucuresti",
-    patientHostipal: "Regina Maria",
+    patientHospital: "Regina Maria",
     patientDetails: "Age 47, still in very good shape",
     quantityRequired: 4.5,
     quantityAvailable: 1
@@ -44,9 +44,17 @@ export const DonationsStatusMock: DonationStatus[] = [
   {
     patientInNeed: "Mihnea Dan",
     patientCity: "Bucuresti",
-    patientHostipal: "Sanador",
+    patientHospital: "Sanador",
     patientDetails: "E nebun",
     quantityRequired: 8,
     quantityAvailable: 2
+  },
+  {
+    patientInNeed: "Mihnea Dan",
+    patientCity: "Bucuresti",
+    patientHospital: "Sanador",
+    patientDetails: "E nebun",
+    quantityRequired: 8,
+    quantityAvailable: 7.9
   }
 ]

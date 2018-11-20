@@ -1,6 +1,6 @@
 export class DonationStatus {
   patientInNeed: string;
-  patientHostipal: string;
+  patientHospital: string;
   patientCity: string;
   patientDetails: string;
   quantityRequired: number;

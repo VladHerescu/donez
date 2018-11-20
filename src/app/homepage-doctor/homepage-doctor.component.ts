@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DonationStatus} from '../DonationDTO/donation-status';
 import {DonationsStatusMock} from '../DonationDTO/donations-status-mock';
 

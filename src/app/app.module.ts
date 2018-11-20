@@ -10,6 +10,7 @@ import { HomepageDonorComponent } from './homepage-donor/homepage-donor.componen
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageDoctorComponent } from './homepage-doctor/homepage-doctor.component';
 import { HomepageStaffComponent } from './homepage-staff/homepage-staff.component';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HomepageStaffComponent } from './homepage-staff/homepage-staff.componen
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
