@@ -11,7 +11,7 @@
         <a class="nav-link" href="#">Profile</a>
       </li>
       <li class="nav-item waves-light" mdbWavesEffect>
-        <a routerLink="/welcome" class="nav-link">Logout</a>
+        <a *ngIf="isLoggedIn()" (click)="signOut()" class="nav-link">Logout</a>
       </li>
     </ul>
     <form class="form-inline waves-light" mdbWavesEffect>

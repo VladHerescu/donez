@@ -8,17 +8,17 @@
           <div class="row flex-center pt-5 mt-3 w-100">
             <div class="col-md-6 text-center text-md-left mb-5">
               <div class="white-text">
-                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right
-                  now! </h2>
+                <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Doneaza sange acum! </h2>
                 <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur
-                  adipisicing
-                  elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat!
-                  Commodi sequi
-                  non animi ea dolor molestiae, quisquam iste, maiores. Nulla.</h6>
+                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Donatorul de sange are de o zi libera (in ziua donarii).
+                  Bonurile valorice pe care le primeste fiecare donator reprezinta o compensare biologica a sangelui pierdut prin donare.</h6>
                 <br>
-                <a mdbBtn color="white" outline="true" class="wow fadeInLeft waves-light" data-wow-delay="0.3s"
-                   mdbWavesEffect>Learn more</a>
+                <!--<a mdbBtn color="white" outline="true" class="wow fadeInLeft waves-light" data-wow-delay="0.3s"-->
+                   <!--mdbWavesEffect>Learn more</a>-->
+                <!-- Video -->
+                <div class="embed-responsive embed-responsive-16by9 mb-4">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vlDzYIIOYmM" allowfullscreen></iframe>
+                </div>
               </div>
             </div>
 
@@ -126,7 +126,7 @@
                     Logheaza-te folosind unul din conturile tale de retele sociale
                   </h4>
                   <div class="inline-ul text-center d-flex justify-content-center">
-                    <a routerLink="/homepage-donor" class="icons-sm tw-ic px-4"><i class="fa fa-twitter white-text"></i></a>
+                    <a (click)="signInWithFB()" class="icons-sm tw-ic px-4"><i class="fa fa-facebook white-text"></i></a>
                     <a routerLink="/homepage-donor" class="icons-sm li-ic px-4"><i class="fa fa-linkedin white-text"> </i></a>
                     <a routerLink="/homepage-donor" class="icons-sm ins-ic px-4"><i class="fa fa-instagram white-text"> </i></a>
                   </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider, SocialUser} from 'angularx-social-login';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-welcome-screen',
@@ -7,11 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeScreenComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, public router: Router) { }
   loginAs: string;
+
+  private user: SocialUser;
+  private loggedIn: boolean;
 
   ngOnInit() {
     this.loginAs = "donor";
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(() => this.router.navigate(["/homepage-donor"]));
+  }
+
+  signInWithLinkedIn(): void {
+    this.authService.signIn(LinkedInLoginProvider.PROVIDER_ID);
   }
 
   isDonor(): boolean {

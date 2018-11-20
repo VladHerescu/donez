@@ -11,6 +11,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomepageDoctorComponent } from './homepage-doctor/homepage-doctor.component';
 import { HomepageStaffComponent } from './homepage-staff/homepage-staff.component';
 import { FormsModule} from '@angular/forms';
+import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
+import { HttpClientModule } from '@angular/common/http';
+
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("117464560904-nskfkua0h90g7tbkpce4b5l8c5f6vgti.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("1966659770076856")
+  }
+]);
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -26,9 +42,16 @@ import { FormsModule} from '@angular/forms';
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocialLoginModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
