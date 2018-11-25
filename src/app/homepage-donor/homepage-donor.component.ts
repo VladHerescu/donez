@@ -4,6 +4,9 @@ import {Donations_mock} from '../DonationDTO/donations-mock';
 import {AuthService, SocialUser} from 'angularx-social-login';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {Location_Mock} from '../DonationDTO/location-mock';
+import {LocationForDonating} from '../DonationDTO/location';
+import {DonationForm} from '../DonationDTO/DonationForm';
 
 @Component({
   selector: 'app-homepage-donor',
@@ -18,15 +21,22 @@ export class HomepageDonorComponent implements OnInit {
   private loggedIn: boolean;
 
   lastDonations: Donation[];
+  locations: LocationForDonating[];
   view: string;
+  donationsForm: DonationForm;
+
   ngOnInit() {
     this.view = "form";
+
+    this.locations = Location_Mock;
     this.lastDonations = Donations_mock;
+    this.donationsForm = new DonationForm();
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
     });
     if (!this.loggedIn) {
+      // DON'T FORGET TO UNCOMMENT THIS
       this.router.navigate(["/welcome"]);
     }
   }
@@ -48,5 +58,8 @@ export class HomepageDonorComponent implements OnInit {
       return true;
     else
       return false;
+  }
+  submitDonationForm(): void {
+    window.console.log(this.donationsForm);
   }
 }

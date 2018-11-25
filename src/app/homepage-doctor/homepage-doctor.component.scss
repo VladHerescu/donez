@@ -36,6 +36,11 @@
 h6 {
   line-height: 1.7;
 }
+.inputQuantity {
+  max-width: 105px;
+  margin-right: 25px;
+  margin-left: 25px;
+}
 @media (max-width: 740px) {
   .full-height,
   .full-height body,
@@ -44,3 +49,4 @@ h6 {
     height: 1040px;
   }
 }
+

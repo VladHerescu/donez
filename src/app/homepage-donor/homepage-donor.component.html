@@ -8,60 +8,83 @@
     <a class="nav-item m-1 nav-link active" (click)="changeToLastDonations()">Vezi donarile anterioare</a>
   </nav>
 </div>
+
 <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
 <div class="container grey lighten-4">
   <div *ngIf="isForm()">
-    <h1>Pentru a va verifica eligibilitatea pentru donarea de sange va rugam sa completati chestionarul urmator</h1>
     <!-- Default form register -->
     <form class="text-center border border-light p-5">
 
-      <p class="h4 mb-4">Sign up</p>
+      <p class="h4 mb-4">Pentru a va verifica eligibilitatea pentru donarea de sange va rugam sa completati chestionarul urmator</p>
+
 
       <div class="form-row mb-4">
-        <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
-        </div>
-        <div class="col">
-          <!-- Last name -->
-          <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+        <!--<div class="col">-->
+          <!--&lt;!&ndash; First name &ndash;&gt;-->
+        <!--</div>-->
+        <div class="text-left col">
+          <label class="bs-switch">
+            1. Credeti ca aveti o stare buna de sanatate?
+            <input [(ngModel)]="donationsForm.q1" name="q1" type="checkbox" class="ml-2">
+            <span class="slider round"></span>
+          </label>
         </div>
       </div>
-
-      <!-- E-mail -->
-      <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
-
-      <!-- Password -->
-      <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-        At least 8 characters and 1 digit
-      </small>
-
-      <!-- Phone number -->
-      <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
-      <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-        Optional - for two step authentication
-      </small>
+      <div class="form-row mb-4">
+        <div class="text-left col">
+          <label class="bs-switch">
+            2. Urmati vreun tratament medicamentos?
+            <input [(ngModel)]="donationsForm.q2" name="q2" type="checkbox" class="ml-2">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+      <div class="form-row mb-4">
+        <div class="text-left col">
+          <label class="bs-switch">
+            3. In ultimele 12 luni ati avut contact sexual cu un partner cu:
+            <select [(ngModel)]="donationsForm.q3" name="q3" multiple>
+              <option value="un partener hiv positiv" class="mr-4">un partener hiv positiv</option>
+              <option value="un partener care se drogheaza prin injectii">un partener care se drogheaza prin injectii</option>
+              <option value="un partener care este platit pentru sex">un partener care este platit pentru sex</option>
+              <option value="un partener cu hemofilie">un partener cu hemofilie</option>
+              <option value="un partener cu hemofilie">parteneri multiplii</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="form-row mb-4">
+        <div class="text-left col">
+          <label class="bs-switch">
+            4. De la ultima donare, sau in ultimele 12 luni ati suferit:
+            <select [(ngModel)]="donationsForm.q4" name="q4" multiple>
+              <option value="o interventie chirurgicala?" class="mr-4">o interventie chirurgicala?</option>
+              <option value="tatuaje, acupunctura, gauri pentru cercei?" class="mr-4">tatuaje, acupunctura, gauri pentru cercei?</option>
+              <option value="ati fost transfuzata?" class="mr-4">ati fost transfuzata?</option>
+              <option value="ati fost insarcinata?" class="mr-4">ati fost insarcinata?</option>
+            </select>
+          </label>
+        </div>
+      </div>
 
       <!-- Newsletter -->
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
-        <label class="custom-control-label" for="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
+        <input [(ngModel)]="donationsForm.receiveOnMail" type="checkbox" class="custom-control-input" name="receiveResultOnEmail" id="receiveResultOnEmail">
+        <label class="custom-control-label" for="receiveResultOnEmail">Primeste rezultatul pe email</label>
       </div>
 
       <!-- Sign up button -->
-      <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+      <button (click)="submitDonationForm()" class="btn btn-info my-4 btn-block" type="submit">Submite rezultatul</button>
       <hr>
 
       <!-- Terms of service -->
-      <p>By clicking
-        <em>Sign up</em> you agree to our
-        <a href="" target="_blank">terms of service</a> and
-        <a href="" target="_blank">terms of service</a>. </p>
+      <p>Poti vedea chestionarul complet si termenii si conditiile
+        <a href="http://storage1.dms.mpinteractiv.ro/media/1/1481/10386/14870715/2/chestionar-pentru-donatorul-de-sange.pdf" target="_blank">aici</a>.</p>
 
     </form>
     <!-- Default form register -->
   </div>
+
   <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
   <div *ngIf="isLastDonations()">
     <h3>Buna stimabile Domn! Mai jos gasiti donarile dumneavoastra!</h3>
@@ -87,16 +110,15 @@
     </table>
   </div>
   <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
-  <div>
-    loc de donat
+  <br>
+  <h2 class="text-center mt-4">Locatiile in care poti dona sunt urmatoarele</h2>
+  <div class="mt-4">
+    <div *ngFor="let location of locations" class="border border-light jumbotron">
+      <h4>{{location.name}}</h4>
+      <p class="lead">Adresa unitatii: {{location.address}}</p>
+      <hr class="my-4">
+      <p>Telefon de contact: {{location.contact}}/{{location.alt_contact}}</p>
+    </div>
   </div>
-  <div>
-    loc de donat
-  </div>
-  <div>
-    loc de donat
-  </div>
-  <div>
-    loc de donat
-  </div>
+
 </div>
