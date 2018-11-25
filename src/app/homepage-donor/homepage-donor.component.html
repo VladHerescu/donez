@@ -101,7 +101,7 @@
       <tbody>
       <tr *ngFor="let pastDonation of lastDonations">
         <th scope="row">{{lastDonations.indexOf(pastDonation)}}</th>
-        <td>{{pastDonation.patientFullName}}</td>
+        <td>{{pastDonation.patientFirstName}} {{pastDonation.patientLastName}}</td>
         <td>{{pastDonation.date}}</td>
         <td>{{pastDonation.clinic}}</td>
         <td>{{pastDonation.details}}</td>

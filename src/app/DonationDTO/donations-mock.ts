@@ -2,21 +2,33 @@ import {Donation} from './donation';
 
 export const Donations_mock: Donation[] = [
   {
-    patientFullName: "Vlad Herescu",
+    patientFirstName: "Vlad",
+    patientLastName: "Herescu",
+    patientCNP: "1960225394429",
+    quantity: 4,
+    patientBloodGroup: "AB4",
     clinic: "Regina maria controceni",
     date: "25.02.2018",
     details: "He's a brave man. God bless him"
   },
   {
-    patientFullName: "Bianca Dandu",
-    clinic: "Regina Maria Victoriei",
-    date: "22.07.2017",
-    details: "Amazing person. So much blood in her"
+    patientFirstName: "Anda",
+    patientLastName: "Herescu",
+    patientCNP: "1960225394429",
+    quantity: 4,
+    patientBloodGroup: "AB4",
+    clinic: "Regina maria controceni",
+    date: "25.02.2018",
+    details: "He's a brave man. God bless him"
   },
   {
-    patientFullName: "Robert Deliu",
-    clinic: "Sanador Berceni",
-    date: "05.06.2011",
-    details: "A liitle fat but constatly losing weight. Nice juicy blood"
-  }
+    patientFirstName: "Vlad",
+    patientLastName: "Berescu",
+    patientCNP: "1960225394429",
+    quantity: 4,
+    patientBloodGroup: "AB4",
+    clinic: "Regina maria controceni",
+    date: "25.02.2018",
+    details: "He's a brave man. God bless him"
+  },
 ]

@@ -10,55 +10,71 @@
 <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
 <div class="container grey lighten-4">
   <div>
-    <h1>In urmatorul formular puteti sa incarcati datele unei donari</h1>
+    <h3 class="black-text text-center strong p-4">Incarca in sistem rezultatele unei donari</h3>
     <!-- Default form register -->
     <form class="text-center border border-light p-5">
 
-      <p class="h4 mb-4">Sign up</p>
-
+      <br>
+      <p class="h6 mb-4">Date donator</p>
       <div class="form-row mb-4">
         <div class="col">
-          <!-- First name -->
-          <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+          <!-- Last name -->
+          <input [(ngModel)]="donationUpload.patientLastName" type="text" id="formLastName" name="defaultRegisterFormLastName" class="form-control" placeholder="Nume donator">
         </div>
         <div class="col">
-          <!-- Last name -->
-          <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+          <!-- First name -->
+          <input [(ngModel)]="donationUpload.patientFirstName" type="text" id="formFirstName" name="defaultRegisterFormFirstName" class="form-control" placeholder="Prenume donator">
+        </div>
+        <div class="col">
+          <!-- CNP -->
+          <input [(ngModel)]="donationUpload.patientCNP" type="text" id="formCNP" name="defaultRegisterFormFirstName" class="form-control" placeholder="CNP">
         </div>
       </div>
 
-      <!-- E-mail -->
-      <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+      <!-- Clinica -->
+      <p class="h6 mb-2">Nume clinica</p>
+      <div class="form-row mb-4">
 
-      <!-- Password -->
-      <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-      <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-        At least 8 characters and 1 digit
-      </small>
-
-      <!-- Phone number -->
-      <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
-      <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
-        Optional - for two step authentication
-      </small>
-
-      <!-- Newsletter -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="defaultRegisterFormNewsletter">
-        <label class="custom-control-label" for="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
+        <select [(ngModel)]="donationUpload.clinic" name="patientClinic" class="browser-default custom-select">
+          <option value="" disabled selected>Choose your option</option>
+          <option *ngFor="let location of locations" value="{{locations.indexOf(location)}}">{{location.name}} de la adresa {{location.address}}</option>
+        </select>
       </div>
 
-      <!-- Sign up button -->
-      <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+      <!-- Cantitate necesara -->
+      <p class="h6 mb-2">Detalii cerere</p>
+      <div class="form-row mb-4">
+        <label>Pacientul a donat: </label>
+        <input [(ngModel)]="donationUpload.quantity" name="quantity" id="quantity" type="number" value="0" class="form-control inputQuantity" placeholder="" aria-describedby="defaultQuantityHelpBlock">
+        <label> litri.</label>
+      </div>
+      <div class="form-row mb-4">
+        <label>Pacientul are grupa de sange: </label>
+        <select [(ngModel)]="donationUpload.patientBloodGroup" name="bloodtype" class="browser-default custom-select inputQuantity">
+          <option value="0"selected>0</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="AB">AB</option>
+        </select>
+      </div>
+      <div class="form-row">
+
+        <label for="additionalDetails"><i class="fa fa-pencil prefix"></i>Introduceti detalii suplimentare</label>
+        <textarea [(ngModel)]="donationUpload.details" type="text" name="additionalDetails" id="additionalDetails" class="md-textarea form-control" rows="3"></textarea>
+
+      </div>
+
+      <!-- Inregistreaza cererea -->
+      <div class="form-row">
+        <div class="col">
+          <button (click)="uploadDonation()" type="submit" class="btn btn-success my-4 btn-block">Inregistreaza donarea</button>
+        </div>
+        <div class="col">
+          <button type="reset" class="btn btn-danger my-4 btn-block">Sterge donarea</button>
+        </div>
+      </div>
+
       <hr>
-
-      <!-- Terms of service -->
-      <p>By clicking
-        <em>Sign up</em> you agree to our
-        <a href="" target="_blank">terms of service</a> and
-        <a href="" target="_blank">terms of service</a>. </p>
-
     </form>
-    <!-- Default form register -->
   </div>
 </div>

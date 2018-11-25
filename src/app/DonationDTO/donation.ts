@@ -1,6 +1,10 @@
 export class Donation {
-  patientFullName: string;
-  clinic: string;
-  date: string;
-  details: string;
+  patientFirstName: string = "";
+  patientLastName: string = "";
+  patientCNP: string = "";
+  quantity: number = 0;
+  patientBloodGroup: string = "";
+  clinic: string = "";
+  date: string = "";
+  details: string = "";
 }
