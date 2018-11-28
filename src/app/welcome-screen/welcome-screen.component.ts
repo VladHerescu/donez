@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider, SocialUser} from 'angularx-social-login';
 import {Router} from '@angular/router';
+import {DonorDTO} from '../UsersDTO/DonorDTO';
+import {UsersService} from '../users.service';
 
 @Component({
   selector: 'app-welcome-screen',
@@ -9,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class WelcomeScreenComponent implements OnInit {
 
-  constructor(private authService: AuthService, public router: Router) { }
+  constructor(private authService: AuthService, public router: Router, public userService: UsersService) { }
   loginAs: string;
 
   private user: SocialUser;
@@ -28,7 +30,7 @@ export class WelcomeScreenComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(() => this.router.navigate(["/homepage-donor"]));
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(res => this.sendUserInfoToServer(this.generateNormalUserDTO(res)));
   }
 
   signInWithLinkedIn(): void {
@@ -61,5 +63,18 @@ export class WelcomeScreenComponent implements OnInit {
   }
   changeToStaff(): void {
     this.loginAs = "staff";
+  }
+  sendUserInfoToServer(donorDTO: DonorDTO): void {
+    window.console.log(donorDTO);
+    this.userService.sendDonorInfoToServer(donorDTO).subscribe(() => this.router.navigate(["/homepage-donor"]).catch());
+  }
+  generateNormalUserDTO(user: SocialUser): DonorDTO {
+    var donorDTO: DonorDTO = new DonorDTO();
+    window.console.log(user);
+    donorDTO.firstName = user.facebook.first_name;
+    donorDTO.lastName = user.facebook.last_name;
+    donorDTO.email = user.facebook.email;
+    donorDTO.userId = user.facebook.id
+    return donorDTO;
   }
 }

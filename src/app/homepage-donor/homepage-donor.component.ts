@@ -7,6 +7,8 @@ import {Router} from '@angular/router';
 import {Location_Mock} from '../DonationDTO/location-mock';
 import {LocationForDonating} from '../DonationDTO/location';
 import {DonationForm} from '../DonationDTO/DonationForm';
+import { DonationCentersService} from '../donation-centers.service';
+import {DonationsService} from '../donations.service';
 
 @Component({
   selector: 'app-homepage-donor',
@@ -15,7 +17,7 @@ import {DonationForm} from '../DonationDTO/DonationForm';
 })
 export class HomepageDonorComponent implements OnInit {
 
-  constructor(private authService: AuthService, public router: Router) { }
+  constructor(private authService: AuthService, public router: Router, public donationCenterService: DonationCentersService, private donationService: DonationsService) { }
 
   private user: SocialUser;
   private loggedIn: boolean;
@@ -28,16 +30,16 @@ export class HomepageDonorComponent implements OnInit {
   ngOnInit() {
     this.view = "form";
 
-    this.locations = Location_Mock;
     this.lastDonations = Donations_mock;
     this.donationsForm = new DonationForm();
+    this.getDonationsClinics();
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
     });
     if (!this.loggedIn) {
       // DON'T FORGET TO UNCOMMENT THIS
-      this.router.navigate(["/welcome"]);
+      // this.router.navigate(["/welcome"]);
     }
   }
   changeToForm(): void {
@@ -59,7 +61,15 @@ export class HomepageDonorComponent implements OnInit {
     else
       return false;
   }
+  getDonationsClinics(): void {
+    this.donationCenterService.getDonationCenters().subscribe(res => this.locations = res);
+  }
+
   submitDonationForm(): void {
-    window.console.log(this.donationsForm);
+    this.donationService.sendDonorFormular(this.donationsForm,this.user).subscribe(
+      res => {
+        this.donationsForm = new DonationForm();
+        window.console.log(res);
+      })
   }
 }

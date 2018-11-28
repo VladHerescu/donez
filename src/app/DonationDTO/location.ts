@@ -3,5 +3,4 @@ export class LocationForDonating {
   name: string;
   address: string;
   contact: string;
-  alt_contact: string;
 }

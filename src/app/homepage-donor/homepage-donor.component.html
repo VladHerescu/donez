@@ -44,11 +44,11 @@
           <label class="bs-switch">
             3. In ultimele 12 luni ati avut contact sexual cu un partner cu:
             <select [(ngModel)]="donationsForm.q3" name="q3" multiple>
-              <option value="un partener hiv positiv" class="mr-4">un partener hiv positiv</option>
-              <option value="un partener care se drogheaza prin injectii">un partener care se drogheaza prin injectii</option>
-              <option value="un partener care este platit pentru sex">un partener care este platit pentru sex</option>
-              <option value="un partener cu hemofilie">un partener cu hemofilie</option>
-              <option value="un partener cu hemofilie">parteneri multiplii</option>
+              <option value="0" class="mr-4">un partener hiv positiv</option>
+              <option value="1">un partener care se drogheaza prin injectii</option>
+              <option value="2">un partener care este platit pentru sex</option>
+              <option value="3">un partener cu hemofilie</option>
+              <option value="4">parteneri multiplii</option>
             </select>
           </label>
         </div>
@@ -58,15 +58,43 @@
           <label class="bs-switch">
             4. De la ultima donare, sau in ultimele 12 luni ati suferit:
             <select [(ngModel)]="donationsForm.q4" name="q4" multiple>
-              <option value="o interventie chirurgicala?" class="mr-4">o interventie chirurgicala?</option>
-              <option value="tatuaje, acupunctura, gauri pentru cercei?" class="mr-4">tatuaje, acupunctura, gauri pentru cercei?</option>
-              <option value="ati fost transfuzata?" class="mr-4">ati fost transfuzata?</option>
-              <option value="ati fost insarcinata?" class="mr-4">ati fost insarcinata?</option>
+              <option value="0" class="mr-4">o interventie chirurgicala?</option>
+              <option value="1" class="mr-4">tatuaje, acupunctura, gauri pentru cercei?</option>
+              <option value="2" class="mr-4">ati fost transfuzata?</option>
+              <option value="3" class="mr-4">ati fost insarcinata?</option>
             </select>
           </label>
         </div>
       </div>
-
+      <div class="form-row mb-4">
+        <label>Ce grupa de sange aveti? </label>
+        <select [(ngModel)]="donationsForm.bloodType" name="bloodtype" class="browser-default custom-select inputQuantity">
+          <option value="0"selected>0</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="AB">AB</option>
+        </select>
+      </div>
+      <div class="form-row mb-4">
+        <label>Unde vreti sa donati?  </label>
+        <input [(ngModel)]="donationsForm.center" list="centers" name="centers">
+        <datalist id="centers">
+          <option *ngFor="let center of locations" value="{{center.name}}">{{center.name}}</option>
+        </datalist>
+      </div>
+      <div class="form-row">
+        <label>Pentru cine vreti sa donati? </label>
+        <div class="form-row mb-4">
+          <div class="col">
+            <!-- Last name -->
+            <input [(ngModel)]="donationsForm.lastName" type="text" id="formLastName" name="defaultRegisterFormLastName" class="form-control" placeholder="Nume pacient">
+          </div>
+          <div class="col">
+            <!-- First name -->
+            <input [(ngModel)]="donationsForm.firstName" type="text" id="formFirstName" name="defaultRegisterFormFirstName" class="form-control" placeholder="Prenume pacient">
+          </div>
+        </div>
+      </div>
       <!-- Newsletter -->
       <div class="custom-control custom-checkbox">
         <input [(ngModel)]="donationsForm.receiveOnMail" type="checkbox" class="custom-control-input" name="receiveResultOnEmail" id="receiveResultOnEmail">
@@ -113,11 +141,11 @@
   <br>
   <h2 class="text-center mt-4">Locatiile in care poti dona sunt urmatoarele</h2>
   <div class="mt-4">
-    <div *ngFor="let location of locations" class="border border-light jumbotron">
+    <div *ngFor="let location of locations" class="border border-light jumbotron p-2">
       <h4>{{location.name}}</h4>
       <p class="lead">Adresa unitatii: {{location.address}}</p>
-      <hr class="my-4">
-      <p>Telefon de contact: {{location.contact}}/{{location.alt_contact}}</p>
+      <hr>
+      <p>Telefon de contact: {{location.contact}}</p>
     </div>
   </div>
 

@@ -4,4 +4,8 @@ export class DonationForm {
   q3: string[] = [];
   q4: string[] = [];
   receiveOnMail: boolean = false;
+  bloodType: string = "";
+  center: string = "";
+  firstName: string = "";
+  lastName: string = "";
 }
