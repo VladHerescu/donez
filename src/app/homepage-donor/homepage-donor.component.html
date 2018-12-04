@@ -1,7 +1,7 @@
 
 <div class="container" style="margin-top: 150px">
   <div class="nav justify-content-center py-4" style="background-color: #3f51b5">
-    <p class="red-text">Ai donat ultima data acum 10 zile</p>
+    <p class="red-text" >Ai donat ultima data pe {{lastDonationTime}}</p>
   </div>
   <nav class="nav nav-pills mdb-color lighten-4 py-1 nav-fill">
     <a class="nav-item m-1 nav-link active" (click)="changeToForm()">Completeaza chestionar</a>
@@ -123,16 +123,16 @@
         <th scope="col">Pentru cine ai donat</th>
         <th scope="col">Data donarii</th>
         <th scope="col">Clinica</th>
-        <th scope="col">Detalii</th>
+        <th scope="col">Linkul unde iti poti vedea analizele</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let pastDonation of lastDonations">
         <th scope="row">{{lastDonations.indexOf(pastDonation)}}</th>
-        <td>{{pastDonation.patientFirstName}} {{pastDonation.patientLastName}}</td>
+        <td>{{pastDonation.patient}}</td>
         <td>{{pastDonation.date}}</td>
-        <td>{{pastDonation.clinic}}</td>
-        <td>{{pastDonation.details}}</td>
+        <td>{{pastDonation.centre}}</td>
+        <td>{{pastDonation.url}}</td>
       </tr>
       </tbody>
     </table>
@@ -149,4 +149,85 @@
     </div>
   </div>
 
+</div>
+
+
+<div mdbModal #frameSuccess="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Poti dona!</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frameSuccess.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>Te asteptam la clinica selectata cu codul {{donationId}}.
+          Ti-am trimis si pe mail confirmarea</p>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Get it now
+          <i class="fa fa-diamond ml-1"></i>
+        </a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect (click)="frameSuccess.hide()" data-dismiss="modal">No, thanks</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<!--MODAL FAIL-->
+<div mdbModal #frameFail="mdbModal" class="modal fade right" id="frameModalTop2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading">Ne pare rau!</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frameFail.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-3">
+            <p></p>
+            <p class="text-center">
+              <i class="fa fa-shopping-cart fa-4x"></i>
+            </p>
+          </div>
+
+          <div class="col-9">
+            <p>{{failMessage}}</p>
+
+          </div>
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="primary" class="waves-effect" mdbWavesEffect>Get it now
+          <i class="fa fa-diamond ml-1"></i>
+        </a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect (click)="frameFail.hide()" data-dismiss="modal">No, thanks</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
 </div>

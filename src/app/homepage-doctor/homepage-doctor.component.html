@@ -1,6 +1,6 @@
 <div class="container" style="margin-top: 150px">
   <div class="nav justify-content-center py-4" style="background-color: #3f51b5">
-    <p class="red-text">Exista 213 litri de sange in 14 unitati!</p>
+    <h2 class="white-text">Buna ziua stimate doctor!</h2>
   </div>
   <nav class="nav nav-pills mdb-color lighten-4 py-1 nav-fill">
     <a class="nav-item m-1 nav-link active" (click)="changeToDonationsStatus()">Vezi statusurile donarilor</a>
@@ -8,7 +8,7 @@
   </nav>
 </div>
 <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
-<div class="container grey lighten-4">
+<div class="container grey lighten-4" style="min-height: 500px">
 
   <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
   <div *ngIf="isLastDonations()">
@@ -18,26 +18,27 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Numele Pacientului</th>
-        <th scope="col">Orasul</th>
+        <th scope="col">Numele donatorului</th>
         <th scope="col">Clinica</th>
-        <th scope="col">Detalii</th>
-        <th scope="col">Cantitate recoltata</th>
+        <th scope="col">Data donarii</th>
+        <th scope="col">Statusul donarii</th>
 
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let dStatus of donationStatus">
         <th scope="row">{{donationStatus.indexOf(dStatus)}}</th>
-        <td>{{dStatus.patientInNeed}}</td>
-        <td>{{dStatus.patientCity}}</td>
-        <td>{{dStatus.patientHospital}}</td>
-        <td>{{dStatus.patientDetails}}</td>
-        <td data-toggle="tooltip" data-placement="top" title="Avem {{dStatus.quantityAvailable}} din {{dStatus.quantityRequired}} litri">
-          <div class="progress" >
-            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': dStatus.quantityAvailable/dStatus.quantityRequired * 100 + '%'}"
-                 [attr.aria-valuenow]="dStatus.quantityAvailable" aria-valuemin="0" [attr.aria-valuemax]="dStatus.quantityRequired"></div>
-          </div>
-        </td>
+        <td>{{dStatus.patient}}</td>
+        <td>{{dStatus.donor}}</td>
+        <td>{{dStatus.centre}}</td>
+        <td>{{dStatus.date}}</td>
+        <!--<td data-toggle="tooltip" data-placement="top" title="Avem {{dStatus.quantityAvailable}} din {{dStatus.quantityRequired}} litri">-->
+          <!--<div class="progress" >-->
+            <!--<div class="progress-bar" role="progressbar" [ngStyle]="{'width': dStatus.quantityAvailable/dStatus.quantityRequired * 100 + '%'}"-->
+                 <!--[attr.aria-valuenow]="dStatus.quantityAvailable" aria-valuemin="0" [attr.aria-valuemax]="dStatus.quantityRequired"></div>-->
+          <!--</div>-->
+        <!--</td>-->
+        <td>{{dStatus.status}}</td>
       </tr>
       </tbody>
     </table>

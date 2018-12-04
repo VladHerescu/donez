@@ -41,25 +41,20 @@
 
                   <!--Body-->
                   <div class="md-form">
-                    <i class="fa fa-user prefix white-text"></i>
-                    <input type="text" id="form3Doctor" class="form-control" mdbInputDirective>
-                    <label for="form3Doctor">Your name</label>
-                  </div>
-                  <div class="md-form">
                     <i class="fa fa-envelope prefix white-text"></i>
-                    <input type="text" id="form2Doctor" class="form-control" mdbInputDirective>
-                    <label for="form2Doctor">Your email</label>
+                    <input type="text" [(ngModel)]="doctorDTO.username" id="form2Doctor" class="form-control" mdbInputDirective>
+                    <label for="form2Staff">Your email</label>
                   </div>
 
                   <div class="md-form">
                     <i class="fa fa-lock prefix white-text"></i>
-                    <input type="password" id="form4Doctor" class="form-control" mdbInputDirective>
-                    <label for="form4Doctor">Your password</label>
+                    <input type="password" [(ngModel)]="doctorDTO.password" id="form4Doctor" class="form-control" mdbInputDirective>
+                    <label for="form4Staff">Your password</label>
                   </div>
-
+                  <h5 *ngIf="failedLogin"><mdb-badge color="red">Email sau parola gresite</mdb-badge></h5>
                   <div class="text-center">
-                    <a routerLink="/homepage-doctor">
-                      <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect>Sign up</button>
+                    <a>
+                      <button (click)="loginAsDoctor()" mdbBtn color="indigo" class="waves-light" mdbWavesEffect>Sign up</button>
                     </a>
                     <hr class="hr-light mb-3 mt-4">
 
@@ -82,25 +77,21 @@
 
                   <!--Body-->
                   <div class="md-form">
-                    <i class="fa fa-user prefix white-text"></i>
-                    <input type="text" id="form3Staff" class="form-control" mdbInputDirective>
-                    <label for="form3Staff">Your name</label>
-                  </div>
-                  <div class="md-form">
                     <i class="fa fa-envelope prefix white-text"></i>
-                    <input type="text" id="form2Staff" class="form-control" mdbInputDirective>
+                    <input type="text" [(ngModel)]="staffDTO.username" id="form2Staff" class="form-control" mdbInputDirective>
                     <label for="form2Staff">Your email</label>
                   </div>
 
                   <div class="md-form">
                     <i class="fa fa-lock prefix white-text"></i>
-                    <input type="password" id="form4Staff" class="form-control" mdbInputDirective>
+                    <input type="password" [(ngModel)]="staffDTO.password" id="form4Staff" class="form-control" mdbInputDirective>
                     <label for="form4Staff">Your password</label>
                   </div>
+                  <h5 *ngIf="failedLogin"><mdb-badge color="red">Email sau parola gresite</mdb-badge></h5>
 
                   <div class="text-center">
-                    <a routerLink="/homepage-staff">
-                      <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect> Logheaza-te ca si donator</button>
+                    <a (click)="loginAsStaff()">
+                      <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect> Logheaza-te ca si membru staff</button>
                     </a>
                     <hr class="hr-light mb-3 mt-4">
                   </div>

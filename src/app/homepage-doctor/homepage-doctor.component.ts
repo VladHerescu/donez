@@ -1,9 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DonationStatus} from '../DonationDTO/donation-status';
-import {DonationsStatusMock} from '../DonationDTO/donations-status-mock';
 import {LocationForDonating} from '../DonationDTO/location';
-import {Location_Mock} from '../DonationDTO/location-mock';
 import {BloodRequest} from '../DonationDTO/blood-request';
+import {DonationsService} from '../donations.service';
 
 @Component({
   selector: 'app-homepage-doctor',
@@ -12,7 +11,7 @@ import {BloodRequest} from '../DonationDTO/blood-request';
 })
 export class HomepageDoctorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private donationService: DonationsService) { }
   view: string;
   donationStatus: DonationStatus[];
   locations: LocationForDonating[];
@@ -45,10 +44,14 @@ export class HomepageDoctorComponent implements OnInit {
       return false;
   }
   getDonationsStatus(): void {
-    this.donationStatus = DonationsStatusMock;
+    this.donationService.getAllDonationsForDoctor().subscribe(
+      (res) => {
+        this.donationStatus = res
+      }
+    )
   }
   getLocations(): void {
-    this.locations = Location_Mock;
+
   }
 
   submitBloodRequest():void {

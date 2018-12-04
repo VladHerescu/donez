@@ -11,7 +11,17 @@ export class DonationsService {
 
   constructor(private http: HttpClient) { }
 
-  sendDonorFormular(donationForm: DonationForm, user: SocialUser): Observable<object> {
-    return this.http.post("url" + user.id,donationForm);
+  sendDonorFormular(donationForm: DonationForm, user: SocialUser): Observable<any> {
+    window.console.log(donationForm);
+    return this.http.post("https://blood-donation-api.herokuapp.com/api/donation/add/" + user.id,donationForm);
+  }
+  getLastDonationTime(user: SocialUser): Observable<any> {
+    return this.http.get("https://blood-donation-api.herokuapp.com/api/donation/lastDonated/" + user.id);
+  }
+  getLastDonations(user: SocialUser): Observable<any> {
+    return this.http.get("https://blood-donation-api.herokuapp.com/api/donation/all/" + user.id);
+  }
+  getAllDonationsForDoctor(): Observable<any> {
+    return this.http.get("https://blood-donation-api.herokuapp.com/api/donation/all");
   }
 }

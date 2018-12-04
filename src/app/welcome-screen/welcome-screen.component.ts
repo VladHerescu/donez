@@ -3,6 +3,10 @@ import {AuthService, FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginPr
 import {Router} from '@angular/router';
 import {DonorDTO} from '../UsersDTO/DonorDTO';
 import {UsersService} from '../users.service';
+import {Doctor} from '../DonationDTO/Doctor';
+import {AuthDoctorService} from '../auth-doctor.service';
+import {DoctorDTO} from '../DonationDTO/DoctorDTO';
+import {StaffDTO} from '../DonationDTO/StaffDTO';
 
 @Component({
   selector: 'app-welcome-screen',
@@ -11,14 +15,20 @@ import {UsersService} from '../users.service';
 })
 export class WelcomeScreenComponent implements OnInit {
 
-  constructor(private authService: AuthService, public router: Router, public userService: UsersService) { }
+  constructor(private authService: AuthService, private authDoctor: AuthDoctorService,public router: Router, public userService: UsersService) { }
   loginAs: string;
 
   private user: SocialUser;
   private loggedIn: boolean;
+  doctorDTO: DoctorDTO;
+  staffDTO: StaffDTO;
+  failedLogin: boolean;
+
 
   ngOnInit() {
     this.loginAs = "donor";
+    this.doctorDTO = new DoctorDTO();
+    this.staffDTO = new StaffDTO();
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
@@ -35,6 +45,29 @@ export class WelcomeScreenComponent implements OnInit {
 
   signInWithLinkedIn(): void {
     this.authService.signIn(LinkedInLoginProvider.PROVIDER_ID);
+  }
+  loginAsDoctor(): void {
+    this.userService.loginAsDoctor(this.doctorDTO).subscribe(
+      () => {
+        sessionStorage.setItem("loggedIn","true");
+        this.failedLogin = false;
+        this.router.navigate(["/homepage-doctor"]);
+      },
+      () => {
+        this.failedLogin = true;
+    })
+  }
+
+  loginAsStaff(): void {
+    this.userService.loginAsStaff(this.staffDTO).subscribe(
+      () => {
+        sessionStorage.setItem("loggedIn","true");
+        this.failedLogin = false;
+        this.router.navigate(["/homepage-staff"]);
+      },
+      () => {
+        this.failedLogin = true;
+      })
   }
 
   isDonor(): boolean {
@@ -57,16 +90,19 @@ export class WelcomeScreenComponent implements OnInit {
   }
   changeToDonor(): void {
     this.loginAs = "donor";
+    this.failedLogin = false;
   }
   changeToDoctor(): void {
     this.loginAs = "doctor";
+    this.failedLogin = false;
   }
   changeToStaff(): void {
     this.loginAs = "staff";
+    this.failedLogin = false;
   }
   sendUserInfoToServer(donorDTO: DonorDTO): void {
     window.console.log(donorDTO);
-    this.userService.sendDonorInfoToServer(donorDTO).subscribe(() => this.router.navigate(["/homepage-donor"]).catch());
+    this.userService.sendDonorInfoToServer(donorDTO).subscribe(() => this.router.navigate(["/homepage-donor"]));
   }
   generateNormalUserDTO(user: SocialUser): DonorDTO {
     var donorDTO: DonorDTO = new DonorDTO();

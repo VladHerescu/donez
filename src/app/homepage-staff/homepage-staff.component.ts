@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {LocationForDonating} from '../DonationDTO/location';
-import {Location_Mock} from '../DonationDTO/location-mock';
 import {Donation} from '../DonationDTO/donation';
 
 @Component({
@@ -19,7 +18,7 @@ export class HomepageStaffComponent implements OnInit {
     this.getLocations();
   }
   getLocations(): void {
-    this.locations = Location_Mock;
+
   }
   uploadDonation(): void {
     window.console.log(this.donationUpload);

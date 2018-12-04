@@ -1,6 +1,6 @@
 <mdb-navbar SideClass="navbar red darken-1 navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
   <mdb-navbar-brand>
-    <a class="logo navbar-brand waves-light" mdbWavesEffect><strong>MDB</strong></a>
+    <a class="logo navbar-brand waves-light" mdbWavesEffect><strong>Si eu Donez!</strong></a>
   </mdb-navbar-brand>
   <links>
     <ul class="navbar-nav mr-auto">
@@ -12,6 +12,9 @@
       </li>
       <li class="nav-item waves-light" mdbWavesEffect>
         <a *ngIf="isLoggedIn()" (click)="signOut()" class="nav-link">Logout</a>
+      </li>
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a *ngIf="isLoggedInAsDoctorOrStaff()" (click)="signOutAsDoctorOrStaff()" class="nav-link">Logout</a>
       </li>
     </ul>
     <form class="form-inline waves-light" mdbWavesEffect>

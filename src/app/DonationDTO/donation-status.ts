@@ -1,9 +1,7 @@
 export class DonationStatus {
-  patientInNeed: string;
-  patientHospital: string;
-  patientCity: string;
-  patientDetails: string;
-  quantityRequired: number;
-  quantityAvailable: number;
-
+  donor: string;
+  patient: string;
+  centre: string;
+  date: string;
+  status: string;
 }

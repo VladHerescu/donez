@@ -32,7 +32,14 @@ export class HeaderComponent implements OnInit {
         .subscribe(() => this.navigateToHomePage());
     }
   }
+  signOutAsDoctorOrStaff(): void {
+    sessionStorage.setItem("loggedIn","false");
+    this.router.navigate(["/welcome"]);
+  }
   isLoggedIn(): boolean {
     return this.loggedIn;
+  }
+  isLoggedInAsDoctorOrStaff(): boolean {
+    return (sessionStorage.getItem("loggedIn") === "true");
   }
 }
