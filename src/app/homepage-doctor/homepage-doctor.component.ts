@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {DonationStatus} from '../DonationDTO/donation-status';
 import {LocationForDonating} from '../DonationDTO/location';
-import {BloodRequest} from '../DonationDTO/blood-request';
+import {BloodRequestDTO} from '../DonationDTO/blood-requestDTO';
 import {DonationsService} from '../donations.service';
+import {DonationCentersService} from '../donation-centers.service';
+import {ModalDirective} from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-homepage-doctor',
@@ -11,17 +13,20 @@ import {DonationsService} from '../donations.service';
 })
 export class HomepageDoctorComponent implements OnInit {
 
-  constructor(private donationService: DonationsService) { }
+  constructor(private donationService: DonationsService, private donationCenterService: DonationCentersService) { }
   view: string;
   donationStatus: DonationStatus[];
   locations: LocationForDonating[];
-  bloodRequest: BloodRequest;
+  bloodRequest: BloodRequestDTO;
+  failMessage: string;
+  @ViewChild('frameSuccess') frameSuccess: ModalDirective;
+  @ViewChild('frameFail') frameFail: ModalDirective;
 
   ngOnInit() {
     this.view = "donationsStatus";
     this.getDonationsStatus();
     this.getLocations();
-    this.bloodRequest = new BloodRequest();
+    this.bloodRequest = new BloodRequestDTO();
   }
 
   changeToForm():void {
@@ -51,10 +56,22 @@ export class HomepageDoctorComponent implements OnInit {
     )
   }
   getLocations(): void {
-
+    this.donationCenterService.getDonationCenters().subscribe(res => this.locations = res);
   }
 
   submitBloodRequest():void {
     window.console.log(this.bloodRequest);
+    this.donationService.submitBloodRequest(this.bloodRequest).subscribe(
+      res => {
+        window.console.log(res);
+        this.bloodRequest = new BloodRequestDTO();
+        this.frameSuccess.show();
+      },
+      err => {
+        window.console.log(err);
+        this.failMessage = err.error.message;
+        this.frameFail.show();
+      }
+    )
   }
 }

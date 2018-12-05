@@ -13,57 +13,27 @@
     <h3 class="black-text text-center strong p-4">Incarca in sistem rezultatele unei donari</h3>
     <!-- Default form register -->
     <form class="text-center border border-light p-5">
-
-      <br>
-      <p class="h6 mb-4">Date donator</p>
-      <div class="form-row mb-4">
-        <div class="col">
-          <!-- Last name -->
-          <input [(ngModel)]="donationUpload.patientLastName" type="text" id="formLastName" name="defaultRegisterFormLastName" class="form-control" placeholder="Nume donator">
-        </div>
-        <div class="col">
-          <!-- First name -->
-          <input [(ngModel)]="donationUpload.patientFirstName" type="text" id="formFirstName" name="defaultRegisterFormFirstName" class="form-control" placeholder="Prenume donator">
-        </div>
-        <div class="col">
-          <!-- CNP -->
-          <input [(ngModel)]="donationUpload.patientCNP" type="text" id="formCNP" name="defaultRegisterFormFirstName" class="form-control" placeholder="CNP">
-        </div>
+      <p>Pentru a face aceasta operatie cat mai usoara, dumneavoastra nu trebuie decat sa introduceti token-ul donatiei, statusul donatiei, si sa faceti upload la analize.</p>
+      <div class="md-form text-center" style="width: 250px">
+        <input mdbInputDirective [(ngModel)]="uploadDonationDTO.donationToken" type="text" name="form1" id="form1" class="form-control">
+        <label for="form1" class="text-black-50">Aici introduceti tokenul donatiei</label>
       </div>
-
-      <!-- Clinica -->
-      <p class="h6 mb-2">Nume clinica</p>
       <div class="form-row mb-4">
-
-        <select [(ngModel)]="donationUpload.clinic" name="patientClinic" class="browser-default custom-select">
-          <option value="" disabled selected>Choose your option</option>
-          <option *ngFor="let location of locations" value="{{locations.indexOf(location)}}">{{location.name}} de la adresa {{location.address}}</option>
+        <label class="mr-4">Care este statusul donatiei </label>
+        <select [(ngModel)]="uploadDonationDTO.donationStatus" name="donationStatus" class="browser-default custom-select" style="width: 300px;">
+          <option value="DONE"selected>Donarea a fost efectuata cu succes</option>
+          <option value="REFUSED">Donarea nu a fost acceptata</option>
+          <!--<option value="B">B</option>-->
         </select>
       </div>
-
-      <!-- Cantitate necesara -->
-      <p class="h6 mb-2">Detalii cerere</p>
       <div class="form-row mb-4">
-        <label>Pacientul a donat: </label>
-        <input [(ngModel)]="donationUpload.quantity" name="quantity" id="quantity" type="number" value="0" class="form-control inputQuantity" placeholder="" aria-describedby="defaultQuantityHelpBlock">
-        <label> litri.</label>
+        <input
+          style="display: none"
+          type="file" (change)="onFileChanged($event)"
+          #fileInput>
+        <button type="button" (click)="fileInput.click()" mdbBtn color="info" mdbWavesEffect>Selecteaza fisierul dorit</button>
+        <label *ngIf="fileLoaded">Fisierul a fost selectat</label>
       </div>
-      <div class="form-row mb-4">
-        <label>Pacientul are grupa de sange: </label>
-        <select [(ngModel)]="donationUpload.patientBloodGroup" name="bloodtype" class="browser-default custom-select inputQuantity">
-          <option value="0"selected>0</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="AB">AB</option>
-        </select>
-      </div>
-      <div class="form-row">
-
-        <label for="additionalDetails"><i class="fa fa-pencil prefix"></i>Introduceti detalii suplimentare</label>
-        <textarea [(ngModel)]="donationUpload.details" type="text" name="additionalDetails" id="additionalDetails" class="md-textarea form-control" rows="3"></textarea>
-
-      </div>
-
       <!-- Inregistreaza cererea -->
       <div class="form-row">
         <div class="col">
@@ -76,5 +46,30 @@
 
       <hr>
     </form>
+  </div>
+</div>
+<div mdbModal #frameSuccess="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Incarcarea a reusit</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frameSuccess.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>Linkul analizelor este {{fileLink}}</p>
+        </div>
+      </div>
+    <!--/.Content-->
+    </div>
   </div>
 </div>
