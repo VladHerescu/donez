@@ -10,5 +10,6 @@ export class Donation {
   patient: string;
   date: string;
   centre: string;
+  status: string;
   url: string;
 }

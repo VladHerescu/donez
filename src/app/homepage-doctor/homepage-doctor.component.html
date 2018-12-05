@@ -69,7 +69,7 @@
 
         <select [(ngModel)]="bloodRequest.centre" name="patientClinic" class="browser-default custom-select">
           <option value="" disabled selected>Choose your option</option>
-          <option *ngFor="let location of locations" value="{{locations.indexOf(location)}}">{{location.name}} de la adresa {{location.address}}</option>
+          <option *ngFor="let location of locations" value="{{location.name}}">{{location.name}} de la adresa {{location.address}}</option>
         </select>
       </div>
 
