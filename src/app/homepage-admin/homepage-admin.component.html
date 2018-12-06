@@ -1,0 +1,164 @@
+<div class="container" style="margin-top: 150px">
+  <div class="nav justify-content-center py-4" style="background-color: #3f51b5">
+    <h2 class="white-text">Buna ziua stimate admin!</h2>
+  </div>
+</div>
+<!--DIV FOR "COMPLETEAZA CHESTIONAR-->
+<div class="container grey lighten-4" style="min-height: 500px">
+  <div class="align-content-center">
+    <button routerLink="/homepage-doctor" class="btn btn-info btn-block" >Fii doctor!</button>
+    <button routerLink="/homepage-staff" class="btn btn-info btn-block" >Fii staff!</button>
+  </div>
+  <div>
+    <h3 class="black-text text-center strong p-4">Creeaza un cont de doctor:</h3>
+    <!-- Default form register -->
+    <form class="text-center border border-light p-5">
+      <br>
+      <p class="h6 mb-4">Date Doctor</p>
+      <div class="form-row mb-4">
+        <div class="col">
+          <!-- Last name -->
+          <input [(ngModel)]="doctorDTO.firstName" type="text" id="formDoctorFirstName" name="formDoctorFirstName" class="form-control" placeholder="Preumele doctorului">
+        </div>
+        <div class="col">
+          <!-- First name -->
+          <input [(ngModel)]="doctorDTO.lastName" type="text" id="formDoctorLastName" name="formDoctorLastName" class="form-control" placeholder="Numele doctorului">
+        </div>
+      </div>
+      <div class="form-row mb-4">
+        <div class="col">
+          <!-- Last name -->
+          <input [(ngModel)]="doctorDTO.emailAddress" type="text" id="formDoctorUsername" name="formDoctorUsername" class="form-control" placeholder="Email-ul contului de doctor">
+        </div>
+        <div class="col">
+          <!-- First name -->
+          <input [(ngModel)]="doctorDTO.password" type="text" id="formDoctorPass" name="formDoctorPass" class="form-control" placeholder="Parola contului de doctor">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <button (click)="createDoctor()" type="submit" class="btn btn-success my-4 btn-block">Inregistreaza cererea</button>
+        </div>
+        <div class="col">
+          <button (click)="cleanDoctor()" type="reset" class="btn btn-danger my-4 btn-block">Sterge cererea</button>
+        </div>
+      </div>
+
+      <hr>
+    </form>
+
+
+  </div>
+  <div>
+    <h3 class="black-text text-center strong p-4">Creeaza un cont de staff:</h3>
+    <!-- Default form register -->
+    <form class="text-center border border-light p-5">
+      <br>
+      <p class="h6 mb-4">Date membru staff</p>
+      <div class="form-row mb-4">
+        <div class="col">
+          <!-- Last name -->
+          <input [(ngModel)]="staffDTO.firstName" type="text" id="formStaffFirstName" name="formStaffFirstName" class="form-control" placeholder="Prenumele membrului de staff">
+        </div>
+        <div class="col">
+          <!-- First name -->
+          <input [(ngModel)]="staffDTO.lastName" type="text" id="formStaffLastName" name="formStaffLastName" class="form-control" placeholder="Numele membrului de staff">
+        </div>
+      </div>
+      <div class="form-row mb-4">
+        <div class="col">
+          <!-- Last name -->
+          <input [(ngModel)]="staffDTO.emailAddress" type="text" id="formStaffUsername" name="formStaffUsername" class="form-control" placeholder="Email-ul contului de staff">
+        </div>
+        <div class="col">
+          <!-- First name -->
+          <input [(ngModel)]="staffDTO.password" type="text" id="formStaffPass" name="formStaffPass" class="form-control" placeholder="Parola contului de staff">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <button (click)="createStaff()" type="submit" class="btn btn-success my-4 btn-block">Inregistreaza cererea</button>
+        </div>
+        <div class="col">
+          <button (click)="cleanStaff()" type="reset" class="btn btn-danger my-4 btn-block">Sterge cererea</button>
+        </div>
+      </div>
+
+      <hr>
+    </form>
+
+
+  </div>
+  <!-- Default form contact -->
+  <form class="text-center border border-light p-5">
+
+    <p class="h4 mb-4">Contacteaza un alt doctor sau membru al staffului</p>
+
+    <!-- Name -->
+    <input type="text" [(ngModel)]="sendAnEmailDTO.sender" id="senderEmail" name="senderEmail" class="form-control mb-4" placeholder="E-mailul tau">
+
+    <!-- Email -->
+    <input type="email" [(ngModel)]="sendAnEmailDTO.receiver" id="receiverEmail" name="receiverEmail" class="form-control mb-4" placeholder="E-mailul destinatarului">
+
+    <!-- Message -->
+    <div class="form-group">
+      <textarea class="form-control rounded-0" [(ngModel)]="sendAnEmailDTO.text" id="exampleFormControlTextarea2" name="exampleFormControlTextarea2" rows="3" placeholder="Mesajul tau"></textarea>
+    </div>
+
+    <!-- Send button -->
+    <button (click)="sendEmail()" class="btn btn-info btn-block" type="submit">Send</button>
+
+  </form>
+  <!-- Default form contact -->
+  <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
+</div>
+<div mdbModal #frameSuccess="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-success" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Succes!</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frameSuccess.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>Userul a fost creat cu succes</p>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+</div>
+<div mdbModal #frameFail="mdbModal" class="modal fade right" id="frameModalTop2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading">Ne pare rau, crearea nu a fost efectuata!</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frameFail.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>{{failMessage}}</p>
+        </div>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>

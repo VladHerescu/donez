@@ -27,6 +27,7 @@
                 <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToDonor()" mdbWavesEffect>Donatori</button>
                 <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToDoctor()" mdbWavesEffect>Doctori</button>
                 <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToStaff()" mdbWavesEffect>Staff</button>
+                <button mdbBtn type="button" color="unique" class="waves-light" (click)="changeToAdmin()" mdbWavesEffect>Admin</button>
               </div>
 
 
@@ -92,6 +93,39 @@
                   <div class="text-center">
                     <a (click)="loginAsStaff()">
                       <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect> Logheaza-te ca si membru staff</button>
+                    </a>
+                    <hr class="hr-light mb-3 mt-4">
+                  </div>
+
+                </div>
+              </div>
+              <!--/.Form-->
+              <!--Form for Staff Login-->
+              <div class="card wow fadeInRight" *ngIf="isAdmin()" data-wow-delay="0.3s">
+                <div class="card-body">
+                  <!--Header-->
+                  <div class="text-center">
+                    <h3 class="white-text"><i class="fa fa-user white-text"></i> Logheaza-te ca si admin</h3>
+                    <hr class="hr-light">
+                  </div>
+
+                  <!--Body-->
+                  <div class="md-form">
+                    <i class="fa fa-envelope prefix white-text"></i>
+                    <input type="text" [(ngModel)]="adminDTO.username" id="form2Admin" class="form-control" mdbInputDirective>
+                    <label for="form2Staff">Your email</label>
+                  </div>
+
+                  <div class="md-form">
+                    <i class="fa fa-lock prefix white-text"></i>
+                    <input type="password" [(ngModel)]="adminDTO.password" id="form4Admin" class="form-control" mdbInputDirective>
+                    <label for="form4Staff">Your password</label>
+                  </div>
+                  <h5 *ngIf="failedLogin"><mdb-badge color="red">Email sau parola gresite</mdb-badge></h5>
+
+                  <div class="text-center">
+                    <a (click)="loginAsAdmin()">
+                      <button mdbBtn color="indigo" class="waves-light" mdbWavesEffect> Logheaza-te ca si admin</button>
                     </a>
                     <hr class="hr-light mb-3 mt-4">
                   </div>

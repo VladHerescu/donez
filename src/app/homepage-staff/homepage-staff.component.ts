@@ -4,6 +4,9 @@ import {Donation} from '../DonationDTO/donation';
 import {UploadDonationDTO} from '../DonationDTO/uploadDonationDTO';
 import {DonationsService} from '../donations.service';
 import {ModalDirective} from 'angular-bootstrap-md';
+import {SendAnEmailDTO} from '../DonationDTO/sendAnEmailDTO';
+import {UsersService} from '../users.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-homepage-staff',
@@ -12,10 +15,11 @@ import {ModalDirective} from 'angular-bootstrap-md';
 })
 export class HomepageStaffComponent implements OnInit {
 
-  constructor(private donationService: DonationsService) { }
+  constructor(private donationService: DonationsService,  public router: Router,private userService: UsersService) { }
   fileLoaded: boolean;
   locations: LocationForDonating[];
   uploadDonationDTO: UploadDonationDTO;
+  sendAnEmailDTO: SendAnEmailDTO;
   succesMessage1: string;
   successMessae2: string;
   errorCreateDoctor: string;
@@ -25,6 +29,10 @@ export class HomepageStaffComponent implements OnInit {
   ngOnInit() {
     this.uploadDonationDTO = new UploadDonationDTO();
     this.getLocations();
+    this.sendAnEmailDTO = new SendAnEmailDTO();
+    this.sendAnEmailDTO.sender = sessionStorage.getItem("userEmail");
+    if (sessionStorage.getItem("loggedIn") !== "staff" && sessionStorage.getItem("loggedIn") !== "admin")
+      this.router.navigate(["/welcome"]);
   }
   getLocations(): void {
 
@@ -46,6 +54,16 @@ export class HomepageStaffComponent implements OnInit {
       },
       err => {
         window.console.log(err);
+      }
+    )
+  }
+  sendEmail(): void {
+    window.console.log(this.sendAnEmailDTO);
+    this.userService.sendEmail(this.sendAnEmailDTO).subscribe(
+      res=> {
+        window.console.log(res);
+        this.sendAnEmailDTO = new SendAnEmailDTO();
+        this.sendAnEmailDTO.sender = sessionStorage.getItem("userEmail");
       }
     )
   }

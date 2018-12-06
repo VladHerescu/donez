@@ -53,7 +53,7 @@ export class HomepageDonorComponent implements OnInit {
 
     if (!this.loggedIn) {
       // DON'T FORGET TO UNCOMMENT THIS
-      // this.router.navigate(["/welcome"]);
+      this.router.navigate(["/welcome"]);
     }
   }
   changeToForm(): void {

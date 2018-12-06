@@ -13,6 +13,7 @@ import { HomepageStaffComponent } from './homepage-staff/homepage-staff.componen
 import { FormsModule} from '@angular/forms';
 import {AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider, SocialLoginModule} from 'angularx-social-login';
 import { HttpClientModule } from '@angular/common/http';
+import { HomepageAdminComponent } from './homepage-admin/homepage-admin.component';
 
 let config = new AuthServiceConfig([
   {
@@ -36,7 +37,8 @@ export function provideConfig() {
     FooterComponent,
     HomepageDonorComponent,
     HomepageDoctorComponent,
-    HomepageStaffComponent
+    HomepageStaffComponent,
+    HomepageAdminComponent
   ],
   imports: [
     BrowserModule,

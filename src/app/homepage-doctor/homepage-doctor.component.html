@@ -99,7 +99,29 @@
 
       <hr>
     </form>
+
   </div>
+  <!-- Default form contact -->
+  <form class="text-center border border-light p-5">
+
+    <p class="h4 mb-4">Contacteaza un alt doctor sau membru al staffului</p>
+
+    <!-- Name -->
+    <input type="text" [(ngModel)]="sendAnEmailDTO.sender" id="senderEmail" name="senderEmail" class="form-control mb-4" placeholder="E-mailul tau">
+
+    <!-- Email -->
+    <input type="email" [(ngModel)]="sendAnEmailDTO.receiver" id="receiverEmail" name="receiverEmail" class="form-control mb-4" placeholder="E-mailul destinatarului">
+
+    <!-- Message -->
+    <div class="form-group">
+      <textarea class="form-control rounded-0" [(ngModel)]="sendAnEmailDTO.text" id="exampleFormControlTextarea2" name="exampleFormControlTextarea2" rows="3" placeholder="Mesajul tau"></textarea>
+    </div>
+
+    <!-- Send button -->
+    <button (click)="sendEmail()" class="btn btn-info btn-block" type="submit">Send</button>
+
+  </form>
+  <!-- Default form contact -->
   <!--DIV FOR "COMPLETEAZA CHESTIONAR-->
 </div>
 <div mdbModal #frameSuccess="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

@@ -40,6 +40,9 @@ export class HeaderComponent implements OnInit {
     return this.loggedIn;
   }
   isLoggedInAsDoctorOrStaff(): boolean {
-    return (sessionStorage.getItem("loggedIn") === "true");
+    if (sessionStorage.getItem("loggedIn") === "doctor" || sessionStorage.getItem("loggedIn") === "staff" || sessionStorage.getItem("loggedIn") === "admin")
+      return true;
+    else
+      return false;
   }
 }

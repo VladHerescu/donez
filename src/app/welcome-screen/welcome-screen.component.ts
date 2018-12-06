@@ -7,6 +7,7 @@ import {Doctor} from '../DonationDTO/Doctor';
 import {AuthDoctorService} from '../auth-doctor.service';
 import {DoctorDTO} from '../DonationDTO/DoctorDTO';
 import {StaffDTO} from '../DonationDTO/StaffDTO';
+import {AdminDTO} from '../DonationDTO/adminDTO';
 
 @Component({
   selector: 'app-welcome-screen',
@@ -22,6 +23,7 @@ export class WelcomeScreenComponent implements OnInit {
   private loggedIn: boolean;
   doctorDTO: DoctorDTO;
   staffDTO: StaffDTO;
+  adminDTO: AdminDTO;
   failedLogin: boolean;
 
 
@@ -29,6 +31,7 @@ export class WelcomeScreenComponent implements OnInit {
     this.loginAs = "donor";
     this.doctorDTO = new DoctorDTO();
     this.staffDTO = new StaffDTO();
+    this.adminDTO = new AdminDTO();
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
@@ -49,8 +52,9 @@ export class WelcomeScreenComponent implements OnInit {
   loginAsDoctor(): void {
     this.userService.loginAsDoctor(this.doctorDTO).subscribe(
       () => {
-        sessionStorage.setItem("loggedIn","true");
+        sessionStorage.setItem("loggedIn","doctor");
         this.failedLogin = false;
+        sessionStorage.setItem("userEmail", this.doctorDTO.username);
         this.router.navigate(["/homepage-doctor"]);
       },
       () => {
@@ -61,15 +65,33 @@ export class WelcomeScreenComponent implements OnInit {
   loginAsStaff(): void {
     this.userService.loginAsStaff(this.staffDTO).subscribe(
       () => {
-        sessionStorage.setItem("loggedIn","true");
+        sessionStorage.setItem("loggedIn","staff");
         this.failedLogin = false;
+        sessionStorage.setItem("userEmail",this.staffDTO.username);
         this.router.navigate(["/homepage-staff"]);
       },
       () => {
         this.failedLogin = true;
       })
   }
-
+  loginAsAdmin(): void {
+    this.userService.loginAsAdmin(this.adminDTO).subscribe(
+      () => {
+        sessionStorage.setItem("loggedIn","admin");
+        this.failedLogin = false;
+        sessionStorage.setItem("userEmail",this.adminDTO.username);
+        this.router.navigate(["/homepage-admin"]);
+      },
+      () => {
+        this.failedLogin = true;
+      })
+  }
+  isAdmin(): boolean {
+    if (this.loginAs === "admin")
+      return true;
+    else
+      return false;
+  }
   isDonor(): boolean {
     if (this.loginAs === "donor")
       return true;
@@ -87,6 +109,10 @@ export class WelcomeScreenComponent implements OnInit {
       return true;
     else
       return false;
+  }
+  changeToAdmin():void {
+    this.loginAs = "admin";
+    this.failedLogin = false;
   }
   changeToDonor(): void {
     this.loginAs = "donor";
